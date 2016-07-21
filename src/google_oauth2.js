@@ -62,8 +62,6 @@ var OAuth = {
       url: 'https://accounts.google.com/o/oauth2/auth'
     };
     request.get(options, function(err, response) {
-      console.log(err)
-      console.log(response.statusCode)
       if (!err && response.statusCode === 200) {
         console.log('Visit the following URL in your browser:\n' +
             response.request.uri.href);
