@@ -26,7 +26,7 @@ var crypto = require('crypto');
 var readline = require('readline');
 require('node-env-file')(appRoot + '/.env');
 
-var DEBUG = true;
+var DEBUG = false;
 
 // From the API console
 var CLIENT_ID = process.env.CLIENT_ID;
