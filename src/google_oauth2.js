@@ -26,7 +26,7 @@ var crypto = require('crypto');
 var readline = require('readline');
 require('node-env-file')(appRoot + '/.env');
 
-var DEBUG = false;
+var DEBUG = true;
 
 // From the API console
 var CLIENT_ID = process.env.CLIENT_ID;
@@ -62,6 +62,8 @@ var OAuth = {
       url: 'https://accounts.google.com/o/oauth2/auth'
     };
     request.get(options, function(err, response) {
+      console.log(err)
+      console.log(response.statusCode)
       if (!err && response.statusCode === 200) {
         console.log('Visit the following URL in your browser:\n' +
             response.request.uri.href);
@@ -229,7 +231,7 @@ var OAuth = {
       }
       return callback(null, ACCESS_TOKEN);
     }
-    OAuth._retrieveOAuthCredentials();
+    OAuth._retrieveOAuthCredentials(callback);
     if (ACCESS_TOKEN && now < TOKEN_EXPIRY) {
       if (DEBUG) {
         console.log('Authorizing, access token still valid (from disk).');

@@ -22,7 +22,7 @@ var fs = require('fs');
 var util = {
   checkDotEnvFile: function() {
     // Check that the .env file exists at all
-    var dotEnvSample = fs.readFileSync(appRoot + '/dot_env');
+    var dotEnvSample = fs.readFileSync(__dirname + '/../dot_env');
     try {
       fs.accessSync(appRoot + '/.env', fs.F_OK);
     } catch (e) {
