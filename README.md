@@ -8,13 +8,18 @@ directly from the [AdWords API](https://developers.google.com/adwords/api/docs/g
 
 # Installation
 
-If you haven't already, first, install [Node.js](https://nodejs.org/en/) for your
-platform of choice (macOS, Windows, UNIX-like). For UNIX-like systems, the easiest
-may be to install the Node Version Manager ([nvm](https://github.com/creationix/nvm#install-script)),
+If you haven’t already, first, install [Node.js](https://nodejs.org/en/) for your
+platform of choice (macOS, Windows, UNIX-like). For macOS and Windows,
+just use the particular downloadable installers,
+for UNIX-like systems, the easiest may be to install the Node Version Manager
+([nvm](https://github.com/creationix/nvm#install-script)),
 and then have nvm install Node.js via ```nvm install node```.
 
-With Node.js comes the Node Package Manager ([npm](https://www.npmjs.com/)).
-You can install the ```adwords-reports-nodejs-lib``` library with the npm command below.
+With Node.js comes the Node Package Manager ([npm](https://www.npmjs.com/))
+that serves for managing projects and their dependencies.
+In an empty folder, initialize a new project via ```npm init``` and follow npm’s initialization wizard.
+You can then install the ```adwords-reports-nodejs-lib``` library as a new dependency
+of your freshly created project with the npm command below.
 
 ```bash
 >$ npm install --save adwords-reports-nodejs-lib
@@ -22,19 +27,26 @@ You can install the ```adwords-reports-nodejs-lib``` library with the npm comman
 
 # Requirements
 
-In order to use the library, you need to [sign up](https://developers.google.com/adwords/api/docs/guides/signup)
-for the AdWords API in order to get a Developer Token and then
-[create a project](https://developers.google.com/adwords/api/docs/guides/first-api-call#set_up_oauth2_authentication)
-in the Developer Console. This step provides you with a Client ID and a Client Secret
-that will be needed during the next steps described in the following.
+In order to use the library you will need:
+
+- **AdWords API Developer Token:** This token can be obtained by
+[signing up for access](https://developers.google.com/adwords/api/docs/guides/signup).
+- **Client ID and Client Secret:**
+[Create a project](https://developers.google.com/adwords/api/docs/guides/first-api-call#set_up_oauth2_authentication)
+in the Developer Console to obtain these.
+
+During first use, you will be prompted to create a hidden ```.env``` file into
+which these three required values should be placed,
+as well as a custom password that serves for encrypting your authentication details.
 
 # Usage
 
-The library is [Promise](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise)-based
-and can be used as outlined in the sample below.
 Upon the first run, the library will guide you through the necessary
-[OAuth](https://developers.google.com/adwords/api/docs/guides/authentication) authentication steps,
-this is a one-time process, the library automatically takes care of refreshing expired authentication tokens.
+[OAuth](https://developers.google.com/adwords/api/docs/guides/authentication)
+authentication steps. This is a one-time process,
+the library automatically takes care of refreshing expired authentication tokens.
+The library is [Promise](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise)-based
+and can be used as outlined in the example below.
 
 ```javascript
 var adwords = require('adwords-reports-nodejs-lib');
