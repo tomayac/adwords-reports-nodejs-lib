@@ -23,7 +23,7 @@ var Url = require('url');
 var OAuth = require('./google_oauth2.js');
 
 var REPORT_DOWNLOAD_URL =
-    'https://adwords.google.com/api/adwords/reportdownload/v201607';
+    'https://adwords.google.com/api/adwords/reportdownload/v201609';
 
 // Retrieves a report covering fromDate to toDate for a given customerId
 function getReport(params) {
