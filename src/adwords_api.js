@@ -18,6 +18,7 @@
 
 var querystring = require('querystring');
 var https = require('https');
+var zlib = require('zlib');
 var Url = require('url');
 
 var OAuth = require('./google_oauth2.js');
@@ -56,13 +57,27 @@ function getReport(params) {
         }
       };
       var request = https.request(postOptions, function(res) {
-        res.setEncoding('utf8');
-        var data = '';
-        res.on('data', function(chunk) {
-          data += chunk;
+        var body = '';
+
+        res.on('error', function(err) {
+          reject(err);
         });
-        res.on('end', function() {
-          return resolve(data);
+
+        var output;
+        if( res.headers['content-encoding'] == 'gzip' ) {
+          var gzip = zlib.createGunzip();
+          res.pipe(gzip);
+          output = gzip;
+        } else {
+          output = res;
+        }
+
+        output.on('data', function(chunk) {
+         var data = chunk.toString('utf-8');
+         body += data;
+        });
+        output.on('end', function() {
+          return resolve(body);
         });
       });
       request.write(postData);
