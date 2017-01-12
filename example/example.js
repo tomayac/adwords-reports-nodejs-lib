@@ -1,5 +1,5 @@
 /**
- * Copyright 2016 Google Inc. All Rights Reserved.
+ * Copyright 2017 Google Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,23 @@
 
 'use strict';
 
-var adwords = require('../index.js');
+const adwords = require('../index.js');
 
+const options = {
+  format: 'TSV',
+  skipReportHeader: true,
+  skipColumnHeader: true,
+  skipReportSummary: true,
+  useRawEnumValues: true,
+  includeZeroImpressions: true
+};
 adwords.getReport({
   cid: '508-120-4568',
-  awql: 'SELECT Criteria FROM KEYWORDS_PERFORMANCE_REPORT DURING 20160101, 20160302'
-}).then(function(data) {
+  awql: 'SELECT Criteria, Clicks FROM KEYWORDS_PERFORMANCE_REPORT DURING TODAY'
+}, options)
+.then(data => {
   console.log(data);
-}).catch(function(err) {
-  throw(err);
+})
+.catch(err => {
+  console.error(err);
 });

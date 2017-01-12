@@ -1,5 +1,5 @@
 /**
- * Copyright 2016 Google Inc. All Rights Reserved.
+ * Copyright 2017 Google Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -229,7 +229,7 @@ var OAuth = {
       }
       return callback(null, ACCESS_TOKEN);
     }
-    OAuth._retrieveOAuthCredentials(callback);
+    OAuth._retrieveOAuthCredentials();
     if (ACCESS_TOKEN && now < TOKEN_EXPIRY) {
       if (DEBUG) {
         console.log('Authorizing, access token still valid (from disk).');

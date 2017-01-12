@@ -1,5 +1,5 @@
 /**
- * Copyright 2016 Google Inc. All Rights Reserved.
+ * Copyright 2017 Google Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,7 @@
 
 'use strict';
 
-var querystring = require('querystring');
-var https = require('https');
-var Url = require('url');
+var request = require('request');
 
 var OAuth = require('./google_oauth2.js');
 
@@ -26,47 +24,57 @@ var REPORT_DOWNLOAD_URL =
     'https://adwords.google.com/api/adwords/reportdownload/v201609';
 
 // Retrieves a report covering fromDate to toDate for a given customerId
-function getReport(params) {
+function getReport(params, options) {
+  if (!options) {
+    options = {};
+  }
   return new Promise(function(resolve, reject) {
     var customerId = params.cid;
     var awql = params.awql;
-    var format = 'TSV';
+    var format = options.format || 'TSV';
 
     // get OAuth access token
     OAuth.authorize(function(err, accessToken) {
       if (err) {
         return reject(err);
       }
-      var postData = querystring.stringify({
-        '__rdquery': awql,
-        '__fmt': format
-      });
-      REPORT_DOWNLOAD_URL = Url.parse(REPORT_DOWNLOAD_URL);
       var postOptions = {
-        host: REPORT_DOWNLOAD_URL.host,
-        path: REPORT_DOWNLOAD_URL.pathname,
+        url: REPORT_DOWNLOAD_URL,
         method: 'POST',
+        gzip: true,
         headers: {
           'Authorization': 'Bearer ' + accessToken,
           'clientCustomerId': customerId,
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'User-Agent': 'Please send me gzip',
-          'Accept-Encoding': 'gzip',
-          'Content-Length': Buffer.byteLength(postData)
+          'User-Agent': 'adwords-reports-nodejs-lib (gzip)',
+          'Accept-Encoding': 'gzip'
+        },
+        form: {
+          '__rdquery': awql,
+          '__fmt': format
         }
       };
-      var request = https.request(postOptions, function(res) {
-        res.setEncoding('utf8');
-        var data = '';
-        res.on('data', function(chunk) {
-          data += chunk;
-        });
-        res.on('end', function() {
-          return resolve(data);
-        });
+      if (typeof options.skipReportHeader !== 'undefined') {
+        postOptions.headers.skipReportHeader = options.skipReportHeader;
+      }
+      if (typeof options.skipColumnHeader !== 'undefined') {
+        postOptions.headers.skipColumnHeader = options.skipColumnHeader;
+      }
+      if (typeof options.skipReportSummary !== 'undefined') {
+        postOptions.headers.skipReportSummary = options.skipReportSummary;
+      }
+      if (typeof options.useRawEnumValues !== 'undefined') {
+        postOptions.headers.useRawEnumValues = options.useRawEnumValues;
+      }
+      if (typeof options.includeZeroImpressions !== 'undefined') {
+        postOptions.headers.includeZeroImpressions =
+            options.includeZeroImpressions;
+      }
+      request.post(postOptions, function(err, response, body) {
+        if (err || response.statusCode !== 200) {
+          return reject(err || 'Error, status code ' + response.statusCode);
+        }
+        return resolve(body);
       });
-      request.write(postData);
-      request.end();
     });
   });
 }

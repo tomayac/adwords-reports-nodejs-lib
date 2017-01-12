@@ -49,26 +49,31 @@ The library is [Promise](https://developer.mozilla.org/en/docs/Web/JavaScript/Re
 and can be used as outlined in the example below.
 
 ```javascript
-var adwords = require('adwords-reports-nodejs-lib');
+const adwords = require('../index.js');
+
+const options = {
+  format: 'TSV',
+  skipReportHeader: true,
+  skipColumnHeader: true,
+  skipReportSummary: true,
+  useRawEnumValues: true,
+  includeZeroImpressions: true
+};
 adwords.getReport({
-  // Change to a real Customer ID.
-  cid: '123-456-789',
-  // Change AWQL query according to the grammar published at
-  // https://developers.google.com/adwords/api/docs/guides/awql.
-  //
-  // Check https://developers.google.com/adwords/api/docs/appendix/reports/all-reports
-  // for the available report types and fields.
-  awql: 'SELECT Criteria FROM KEYWORDS_PERFORMANCE_REPORT DURING LAST_WEEK'
-}).then(function(data) {
+  cid: '508-120-4568',
+  awql: 'SELECT Criteria, Clicks FROM KEYWORDS_PERFORMANCE_REPORT DURING TODAY'
+}, options)
+.then(data => {
   console.log(data);
-}).catch(function(err) {
-  throw(err);
+})
+.catch(err => {
+  console.error(err);
 });
 ```
 
 # License
 
-Copyright 2016 Thomas Steiner (@tomayac, tomac@google.com)
+Copyright 2017 Thomas Steiner (@tomayac, tomac@google.com)
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use
 this file except in compliance with the License. You may obtain a copy of the License at
