@@ -49,8 +49,9 @@ The library is [Promise](https://developer.mozilla.org/en/docs/Web/JavaScript/Re
 and can be used as outlined in the example below.
 
 ```javascript
-const adwords = require('../index.js');
+const adwords = require('adwords-reports-nodejs-lib');
 
+// Options are optional and can be omitted
 const options = {
   format: 'TSV',
   skipReportHeader: true,
@@ -60,7 +61,7 @@ const options = {
   includeZeroImpressions: true
 };
 adwords.getReport({
-  cid: '508-120-4568',
+  cid: '123-456-7890',
   awql: 'SELECT Criteria, Clicks FROM KEYWORDS_PERFORMANCE_REPORT DURING TODAY'
 }, options)
 .then(data => {

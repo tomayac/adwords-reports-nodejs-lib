@@ -27,7 +27,7 @@ const options = {
   includeZeroImpressions: true
 };
 adwords.getReport({
-  cid: '508-120-4568',
+  cid: '123-456-7890',
   awql: 'SELECT Criteria, Clicks FROM KEYWORDS_PERFORMANCE_REPORT DURING TODAY'
 }, options)
 .then(data => {
