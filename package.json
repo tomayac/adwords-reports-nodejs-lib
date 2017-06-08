@@ -1,6 +1,6 @@
 {
   "name": "adwords-reports-nodejs-lib",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Node.js library for pulling AdWords API reports.",
   "main": ".index.js",
   "repository": {
@@ -8,7 +8,8 @@
     "url": "https://github.com/tomayac/adwords-reports-nodejs-lib.git"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "jshint ."
   },
   "keywords": [
     "AdWords API",
