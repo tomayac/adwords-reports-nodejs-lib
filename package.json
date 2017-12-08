@@ -1,6 +1,6 @@
 {
   "name": "adwords-reports-nodejs-lib",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "Node.js library for pulling AdWords API reports.",
   "main": ".index.js",
   "repository": {
@@ -21,7 +21,7 @@
   "dependencies": {
     "app-root-path": "^2.0.1",
     "node-env-file": "^0.1.8",
-    "request": "^2.81.0"
+    "request": "^2.83.0"
   },
   "engines": {
     "node": ">=4.8.x",
