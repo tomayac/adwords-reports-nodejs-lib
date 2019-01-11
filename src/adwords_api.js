@@ -21,7 +21,7 @@ var request = require('request');
 var OAuth = require('./google_oauth2.js');
 
 var REPORT_DOWNLOAD_URL =
-    'https://adwords.google.com/api/adwords/reportdownload/v201806';
+    'https://adwords.google.com/api/adwords/reportdownload/v201809';
 
 // Retrieves a report covering fromDate to toDate for a given customerId
 function getReport(params, options) {
