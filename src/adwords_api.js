@@ -20,6 +20,10 @@ var request = require('request');
 
 var OAuth = require('./google_oauth2.js');
 
+var appRoot = require('app-root-path');
+require('node-env-file')(appRoot + '/.env');
+var DEVELOPER_TOKEN = process.env.DEVELOPER_TOKEN;
+
 var REPORT_DOWNLOAD_URL =
     'https://adwords.google.com/api/adwords/reportdownload/v201809';
 
@@ -45,6 +49,7 @@ function getReport(params, options) {
         headers: {
           'Authorization': 'Bearer ' + accessToken,
           'clientCustomerId': customerId,
+          'developerToken': DEVELOPER_TOKEN,
           'User-Agent': 'adwords-reports-nodejs-lib (gzip)',
           'Accept-Encoding': 'gzip'
         },
