@@ -19,7 +19,7 @@
   "author": "Thomas Steiner (@tomayac, tomac@google.com)",
   "license": "Apache-2.0",
   "dependencies": {
-    "app-root-path": "^2.0.1",
+    "app-root-path": "^3.0.0",
     "node-env-file": "^0.1.8",
     "request": "^2.83.0"
   },
