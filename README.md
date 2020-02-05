@@ -86,4 +86,4 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
 either express or implied. See the License for the specific language governing permissions
 and limitations under the License.
 
-[![NPM](https://nodei.co/npm/adwords-reports-nodejs-lib.png?downloads=true)](https://nodei.co/npm/adwords-reports-nodejs-lib/)
+[![NPM](https://nodei.co/npm/adwords-reports-nodejs-lib.png?downloads=true)](https://nodei.co/npm/adwords-reports-nodejs-lib/) [![Greenkeeper badge](https://badges.greenkeeper.io/tomayac/adwords-reports-nodejs-lib.svg)](https://greenkeeper.io/)
